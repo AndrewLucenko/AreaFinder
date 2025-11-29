@@ -1,6 +1,13 @@
 import google.genai as genai
+import os
+from dotenv import load_dotenv
 
-client = genai.Client(api_key="AIzaSyA7DRc4Sw862eKfv1k25VzXBxNOLjCKirU")
+load_dotenv()
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+
+client = genai.Client(api_key=GEMINI_API_KEY)
 
 def get_place_description(name: str, score: float) -> str:
     prompt = f"""
