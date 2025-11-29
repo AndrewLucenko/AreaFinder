@@ -1,6 +1,7 @@
 import json
 import os
 
+from visualization.app import run_ui
 from scripts.score_algorithm import filter_locations, add_normalized_fields
 from scripts.get_description import get_place_description
 viewport = {
@@ -29,6 +30,7 @@ result = filter_locations(normalized_data, viewport, weights, min_score=0.5)
 
 def main():
     print(result)
+    run_ui()
 
 
 if __name__ == "__main__":
