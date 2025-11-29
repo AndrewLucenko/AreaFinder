@@ -27,7 +27,7 @@ def add_normalized_fields(input_path, output_dir):
         subway_norm = (d["subway_stations_nearby"] - min_sub) / sub_range
 
         borough = d.get("borough")
-        borough_quality = borough_scores.get(borough, 0.5)  # default 0.5 якщо район невідомий
+        borough_quality = borough_scores.get(borough, 0.5)
 
         d["normalized"] = {
             "restaurants": restaurants_norm,
@@ -43,26 +43,6 @@ def add_normalized_fields(input_path, output_dir):
     return data
 
 def filter_locations(data, viewport, weights, min_score=0.0):
-    """
-    Повертає JSON з локаціями, які:
-    1) знаходяться у межах видимої частини карти (viewport)
-    2) мають score >= min_score
-    3) вже містять усі normalized коефіцієнти + score
-
-    viewport = {
-        "ne_lat": ...,
-        "ne_lng": ...,
-        "sw_lat": ...,
-        "sw_lng": ...
-    }
-
-    weights = {
-        "restaurants": 0.6,
-        "subway": 0.3,
-        "borough_quality": 0.1
-    }
-    """
-
     ne_lat = viewport["ne_lat"]
     ne_lng = viewport["ne_lng"]
     sw_lat = viewport["sw_lat"]
